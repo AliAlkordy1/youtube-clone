@@ -1,6 +1,6 @@
 .sidebar{
     background: #fff;
-    width: 10%;
+    width: 11%;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -36,7 +36,7 @@
 }
 
 .sub-list h3{
-    font-size: 13px;
+    font-size: 17px;
     margin: 20px 0;
     color: #5a5a5a;
 
@@ -81,5 +81,5 @@
     .sidebar{
         display: none;
     }
-    
+
 }
