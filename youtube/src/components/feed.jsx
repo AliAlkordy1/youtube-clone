@@ -1,106 +1,43 @@
 import './../styles/feed.css';
+import { Link } from 'react-router-dom';
+import { API_KEY , value_converter} from './../data.js';
+import { useState, useEffect } from 'react';
+import moment from 'moment';
 
 // eslint-disable-next-line react/prop-types
-export default function Feed({Sidebar}) {
+export default function Feed({ Sidebar, catagory }) {
+    const [data, setData] = useState([]);
+
+    // Keeping the 'feed' function unchanged
+    const feed = ({ catagory }) => {
+        const fetchData = async () => {
+            const videoList_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IQ&videoCategoryId=${catagory}&key=${API_KEY}`;
+            await fetch(videoList_url)
+                .then(response => response.json())
+                .then(data => setData(data.items));
+        };
+
+        // Call fetchData inside feed
+        fetchData();
+    };
+
+    // Call the 'feed' function inside useEffect to trigger data fetching when 'catagory' changes
+    useEffect(() => {
+        feed({ catagory });  // Calling feed function with 'catagory'
+    }, [catagory]);  // Re-run effect when 'catagory' changes
+
+
 
     return <>
     <div className={Sidebar ? "large-feed" : "feed"}>
-        <div className="card">
-            <img src="https://marketplace.canva.com/EAFW7JwIojo/2/0/1600w/canva-red-colorful-tips-youtube-thumbnail-FxVVsqyawqY.jpg" alt="thumbnail" />
-            <h2>Secerts you should know</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.easil.com/wp-content/uploads/20210901140229/Block-Heading-Falling-Cash-Template-youtube-thumbnail.jpg" alt="thumbnail" />
-            <h2>boos you finance now </h2>
-            <h3>Finance Chaneel</h3>
-            <p>200k views &bull; 7 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/a75368173330847.648e9fb76d648.jpg" alt="thumbnail" />
-            <h2>how to desgin thumbnail</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.easil.com/wp-content/uploads/20210901120345/Teal-White-Tech-Design-with-white-person-outline-youtube-thumbnail-2.jpg" alt="thumbnail" />
-            <h2>what the tech is SMTP</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/neon-prank-time-youtube-thumbnail-template-2casf84a069b41.webp" alt="thuMbnail" />
-            <h2>Aprils fool ideas</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://cdn.textstudio.com/output/studio/template/preview/stamped/7/8/0/t/ewfg30t087.webp" alt="thubnail" />
-            <h2>How to earn money online</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://designimages.appypie.com/ytthumbnail/ytthumbnail-16-t-shirt-face.jpg" alt="thubnail" />
-            <h2>make you mind a priority</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.ytimg.com/vi/82zWdrmnKME/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBHMfqqKOaR5UFDosQMxuYk5OT6sA" alt="thubnail" />
-            <h2>free thumbnail makers</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://marketplace.canva.com/EAFW7JwIojo/2/0/1600w/canva-red-colorful-tips-youtube-thumbnail-FxVVsqyawqY.jpg" alt="thumbnail" />
-            <h2>Secerts you should know</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.easil.com/wp-content/uploads/20210901140229/Block-Heading-Falling-Cash-Template-youtube-thumbnail.jpg" alt="thumbnail" />
-            <h2>boos you finance now </h2>
-            <h3>Finance Chaneel</h3>
-            <p>200k views &bull; 7 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/a75368173330847.648e9fb76d648.jpg" alt="thumbnail" />
-            <h2>how to desgin thumbnail</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.easil.com/wp-content/uploads/20210901120345/Teal-White-Tech-Design-with-white-person-outline-youtube-thumbnail-2.jpg" alt="thumbnail" />
-            <h2>what the tech is SMTP</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/neon-prank-time-youtube-thumbnail-template-2casf84a069b41.webp" alt="thuMbnail" />
-            <h2>Aprils fool ideas</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://cdn.textstudio.com/output/studio/template/preview/stamped/7/8/0/t/ewfg30t087.webp" alt="thubnail" />
-            <h2>How to earn money online</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://designimages.appypie.com/ytthumbnail/ytthumbnail-16-t-shirt-face.jpg" alt="thubnail" />
-            <h2>make you mind a priority</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
-        <div className="card">
-            <img src="https://i.ytimg.com/vi/82zWdrmnKME/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBHMfqqKOaR5UFDosQMxuYk5OT6sA" alt="thubnail" />
-            <h2>free thumbnail makers</h2>
-            <h3>jacob Chaneel</h3>
-            <p>15k views &bull; 2 days ago</p>  
-        </div>
+    {data.map((item,index)=>{return (  <Link to={`video/${item.snippet.catagoryId}/${item.id}`} className="card" key={index}>
+            <img src={item.snippet.thumbnails.medium.url} alt="thumbnail" />
+            <h2>{item.snippet.title}</h2>
+            <h3>{item.snippet.channelTitle}</h3>
+            <p>{value_converter(item.statistics.viewCount)} views &bull; {moment(item.snippet.publishedAt).fromNow()}</p>  
+        </Link>)})}
+      
+        
 
 
     </div>

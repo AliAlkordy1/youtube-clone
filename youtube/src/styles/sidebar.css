@@ -72,3 +72,8 @@
     margin-bottom: 25px;
     width: 30%;
 }
+.sidelinks.active .shortcut-icons{
+    padding-bottom: 2px;
+    border-bottom: 3px solid red;
+
+}
