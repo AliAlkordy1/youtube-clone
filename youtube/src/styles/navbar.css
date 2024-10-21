@@ -46,3 +46,23 @@ nav{
     cursor: pointer;
 }
 
+@media(max-width :900px){
+    .menu-icon{display: none;}
+    .right-icons{
+        display: none;
+    }
+    .profile-img{
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50px;
+        object-fit: cover;
+    }
+    #logo{
+        width: 90px;
+    }
+    .search-box input{
+        width: 100px;
+
+    }
+}

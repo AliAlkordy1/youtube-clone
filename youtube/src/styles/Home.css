@@ -10,3 +10,14 @@
     padding-left: 10%;
 
 }
+@media(max-width: 900px){
+    .container{
+        
+        
+
+    }
+    .large-container{
+        
+       
+    }
+}

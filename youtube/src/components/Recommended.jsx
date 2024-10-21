@@ -1,68 +1,38 @@
+import { useState,useEffect } from 'react';
 import './../styles/recommended.css';
+import {API_KEY} from './../data.js';
 
+// eslint-disable-next-line react/prop-types
+const Recommended = ({categoryId}) => {
+  
 
-const Recommended = () => {
+  const [apiData, setApiData] = useState([]);
+  const fetchRecommendedData = async () => {
+    const relatedVideo_url=`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IQ&videoCategoryId=${categoryId}&key=${API_KEY}`
+    await fetch(relatedVideo_url).then(response => response.json()).then(data=>setApiData(data.items || []))
+  } 
+  useEffect(()=>
+    {
+      fetchRecommendedData();
+    },
+  []) 
+
   return (
     <div className="recommended">
-    <div className="side-video-list">
-      <img src="https://i.ytimg.com/vi/rPrEDGL5sos/maxresdefault.jpg" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار وينكم </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
+      {apiData.map((item, index) => {
+        return (
+          <div key={index} className="side-video-list">
+            <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
+            <div className="div-info">
+              <h4>{item.snippet.title}</h4>
+              <p>{item.snippet.channelTitle}</p>
+              <p>{item.statistics.viewCount} views</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
-    <div className="side-video-list">
-      <img src="https://i.ytimg.com/vi/f2co00BGxVY/sddefault.jpg" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار واعدتني </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-    <div className="side-video-list">
-      <img src="https://s2.dmcdn.net/v/2bv3v1Vav4zxEkaBz/x1080" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار يجيني الليل </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-    <div className="side-video-list">
-      <img src="https://source.boomplaymusic.com/group10/M00/06/26/f28a08d1dd234d18a4af32129dda908c.jpg" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار منين اجيب الفرح </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-    <div className="side-video-list">
-      <img src="https://i.ytimg.com/vi/r6pXQcoymd4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAWda9euuHy2UyzUiYPkTkLDxQdIQ" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار رومانسيات واحزان </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-    <div className="side-video-list">
-      <img src="https://i.ytimg.com/vi/qn1F5lbNq-s/maxresdefault.jpg" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار تعودت روحي </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-    <div className="side-video-list">
-      <img src="https://i.ytimg.com/vi/vgV2t6E-8Ko/maxresdefault.jpg" alt="" />
-      <div className="div-info">
-        <h4>محمد عبد الجبار شمسين </h4>
-        <p>محمد عبد الجبار</p>
-        <p>199k views</p>
-      </div>
-    </div>
-
-    </div>
-  )
+  );
 }
 
 export default Recommended

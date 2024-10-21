@@ -44,3 +44,14 @@
 .card p{
     font-size: 14px;
 }
+@media(max-width: 900px){
+   .large-feed{
+    display: block;
+    
+   
+
+}
+.card h2{
+        width: 90%;
+    }
+}

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Icon } from '@iconify-icon/react';
+import { Link } from 'react-router-dom';
 
 import './../styles/navbar.css';
 
@@ -8,7 +9,7 @@ export default function Navbar({setSidebar}) {
         <nav className=" flex-dev" >
             <div className="nav-left flex-dev">
             <Icon icon="material-symbols:menu" width="30" height="30"  style={{color: 'gray',cursor : "pointer"}} className="menu-icon" onClick={()=> setSidebar(prev=> prev === false ? true : false)  }/>
-            <Icon icon="logos:youtube" width="90" height="48" style={{cursor : "pointer"}}/>
+          <Link to="/"><Icon icon="logos:youtube" width="90" height="48" style={{cursor : "pointer"}} id="logo"/></Link>  
 
             </div>
             <div className="nav-middle flex-dev">
